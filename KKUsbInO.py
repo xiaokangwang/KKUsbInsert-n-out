@@ -31,14 +31,17 @@ def main():
     if not os.path.exists("push"):
         lg.critical("no push dir", stack_info=True)
         print("nothing to push")
+        exit(0)
 
     if not os.path.isdir("push"):
         lg.critical("push is not dir", stack_info=True)
         print("push should be a dir")
+        exit(0)
 
     if not os.path.isfile("config.json"):
         lg.critical("no configure file found", stack_info=True)
         print("no configure found")
+        exit(0)
 
     config = {}
 
