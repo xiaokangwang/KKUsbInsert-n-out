@@ -101,28 +101,31 @@ def main():
     lg.info("founded device to be skipped,count= %s", len(previosdrive))
     print("Ready.")
 
+    count = 0
+
     while (1):
+        count + +
         nowdev = enum_drive()
         if nowdev == previosdrive:
             time.sleep(tif)
             continue
         else:
             newdev = list(nowdev - previosdrive)
-            lg.info("device founded, %s", newdev[0])
-            print("device was found at ", newdev[0])
+            lg.info("[" + count + "]device founded, %s", newdev[0])
+            print("[" + count + "]device was found at ", newdev[0])
 
-            print("Copying......")
+            print("[" + count + "]Copying......")
             shutil.copytree("push", newdev[0] + "push")
 
-            lg.info("Copy finished!, %s", newdev[0])
+            lg.info("[" + count + "]Copy finished!, %s", newdev[0])
             print("Copy finished!", newdev[0])
 
-            print("You can remove your device now.")
+            print("[" + count + "]You can remove your device now.")
             keepl = 1
             while (keepl):
                 if previosdrive == enum_drive():
-                    lg.info("device was removed.")
-                    print("Ready for next device!")
+                    lg.info("[" + count + "]device was removed.")
+                    print("[" + count + "]Ready for next device!")
                     keepl = 0
 
 
