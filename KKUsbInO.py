@@ -2,6 +2,7 @@ __author__ = 'xiaokangwang'
 import os
 import shutil
 import json
+import logging
 
 
 def enum_drive_win():
@@ -20,6 +21,16 @@ def enum_drive_linux(mounting_point):
     return set(os.listdir(mounting_point))
  
 def main():
+    logging.basicConfig(filename="KKUsbO.log",
+                        filemode='a',
+                        format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+                        datefmt='%H:%M:%S',
+                        level=logging.DEBUG)
+    logging_kwconf = {"stack_info": True}
+    logging.getLogger("KKUsbInO_runtime")
+
+
+
     if !os.path.exists("push"):
         print("nothing to push")
 

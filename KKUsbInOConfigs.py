@@ -5,6 +5,13 @@ import logging
 
 
 def main():
+    logging.basicConfig(filename="KKUsbO.log",
+                        filemode='a',
+                        format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+                        datefmt='%H:%M:%S',
+                        level=logging.DEBUG)
+    logging_kwconf = {"stack_info": True}
+    logging.getLogger("KKUsbInO_configor")
     config = {}
     if os.path.isfile("config.conf"):
 
