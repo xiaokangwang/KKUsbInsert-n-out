@@ -104,7 +104,7 @@ def main():
     count = 0
 
     while (1):
-        count + +
+        count += 1
         nowdev = enum_drive()
         if nowdev == previosdrive:
             time.sleep(tif)
