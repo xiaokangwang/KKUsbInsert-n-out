@@ -43,7 +43,7 @@ def main():
         print("push should be a dir")
         exit(0)
 
-    if not os.path.isfile("config.json"):
+    if not os.path.isfile("config.conf"):
         lg.critical("no configure file found", stack_info=True)
         print("no configure file found")
         exit(0)
@@ -51,7 +51,7 @@ def main():
     config = {}
 
     try:
-        with open("config.json") as config_fd:
+        with open("config.conf") as config_fd:
             config = json.load(config_fd)
     except Exception as errs:
         lg.critical("Cannot load config.json as json, %s", str(errs), stack_info=True)
