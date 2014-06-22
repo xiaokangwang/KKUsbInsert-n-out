@@ -11,7 +11,7 @@ def enum_drive_win():
     charlst = list(chars)
     for char in charlst:
         res=os.system("cd "+char+":")
-        if !res:
+        if not res:
             drivelst.append(char)
 
     return drivelst
@@ -23,22 +23,22 @@ def enum_drive_linux(mounting_point):
 def main():
     logging.basicConfig(filename="KKUsbO.log",
                         filemode='a',
-                        format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
-                        datefmt='%H:%M:%S',
+                        format='\n\n%(levelname)s: %(asctime)s %(name)s %(message)s',
                         level=logging.DEBUG)
     logging_kwconf = {"stack_info": True}
-    logging.getLogger("KKUsbInO_runtime")
+    lg = logging.getLogger("KKUsbInO_runtime")
 
-
-
-    if !os.path.exists("push"):
+    if not os.path.exists("push"):
+        lg.critical("no push dir", stack_info=True)
         print("nothing to push")
 
-    if !os.path.isdir("push"):
+    if not os.path.isdir("push"):
+        lg.critical("push is not dir", stack_info=True)
         print("push should be a dir")
 
-    if !os.path.isfile("config.json"):
-        print "no configure found"
+    if not os.path.isfile("config.json"):
+        lg.critical("no configure file found", stack_info=True)
+        print("no configure found")
 
     config = {}
 
@@ -46,7 +46,8 @@ def main():
         with open("config.json") as config_fd:
             config = json.load(config_fd)
     except Exception as errs:
-        print(err)
+        lg.critical("Cannot load config.json as json, %s", str(errs), stack_info=True)
+        print(errs)
 
 
 
