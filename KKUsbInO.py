@@ -83,6 +83,14 @@ def main():
         print("dir push is empty")
         exit(0)
 
+    tif = -1.0
+    try:
+        tif = float(config["ti"])
+    except Exception as errs:
+        lg.error("ti in config is not float like")
+        print("ti is not float")
+
+
     previosdrive = enum_drive()
 
 
