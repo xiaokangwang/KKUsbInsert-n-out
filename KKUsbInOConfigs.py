@@ -72,15 +72,17 @@ def main():
         if inpds[0] == "s":
             if len(inpds) != 3:
                 print("too few or too many args")
+                continue
             config[inpds[1]] = inpds[2]
             lg.info("set arg: %s => %s ", inpds[1], inpds[2])
 
         if inpds[0] == "d":
-            if len(inpds) != 3:
+            if len(inpds) != 2:
                 print("too few or too many args")
+                continue
 
             print(config[inpds[1]])
-            lg.info("get arg: %s => %s ", inpds[1])
+            lg.info("get arg: %s => %s ", inpds[1], config[inpds[1]])
 
 
 
