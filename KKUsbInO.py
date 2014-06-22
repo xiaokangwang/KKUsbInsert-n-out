@@ -106,6 +106,23 @@ def main():
             continue
         else:
             newdev = nowdev - previosdrive
+            lg.info("device founded, %s", newdev[0])
+            print("device was found at ", newdev[0])
+
+            print("Copying......")
+            shutil.copytree("push", newdev[0])
+
+            lg.info("Copy finished!, %s", newdev[0])
+            print("Copy finished!", newdev[0])
+
+            print("You can remove your device now.")
+            keepl = 1
+            while (keepl):
+                if previosdrive == enum_drive():
+                    lg.info("device was removed.")
+                    print("Ready for next device!")
+                    keepl = 0
+
 
 
 
