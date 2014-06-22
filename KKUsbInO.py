@@ -14,7 +14,7 @@ def enum_drive_win():
         if not res:
             drivelst.append(char + ":\\")
 
-    return drivelst
+    return set(drivelst)
 
 
 def enum_drive_linux(mounting_point):
@@ -82,7 +82,8 @@ def main():
         lg.error("push is empty, there is nothing to push")
         print("dir push is empty")
         exit(0)
-        
+
+    previosdrive = enum_drive()
 
 
 
