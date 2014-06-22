@@ -120,7 +120,7 @@ def main():
             lg.info("[" + str(count) + "]Copy finished!, %s", newdev[0])
             print("Copy finished!", newdev[0])
 
-            print("[" + count + "]You can remove your device now.")
+            print("[" + str(count) + "]You can remove your device now.")
             keepl = 1
             while (keepl):
                 if previosdrive == enum_drive():
