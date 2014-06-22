@@ -18,7 +18,12 @@ def enum_drive_win():
 
 
 def enum_drive_linux(mounting_point):
-    return set(os.listdir(mounting_point))
+    drs = os.listdir(mounting_point)
+    drsx = set()
+    for drsxt in drs:
+        drs.append(mounting_point + drsxt)
+
+    return drsx
  
 def main():
     logging.basicConfig(filename="KKUsbO.log",
@@ -90,8 +95,20 @@ def main():
         lg.error("ti in config is not float like")
         print("ti is not float")
 
-
     previosdrive = enum_drive()
+
+    lg.info("founded device to be skipped,count= %s", previosdrive)
+
+    while (1):
+        nowdev = enum_drive()
+        if nowdev == previosdrive:
+            time.sleep(tif)
+            continue
+        else:
+            newdev = nowdev - previosdrive
+
+
+
 
 
 
