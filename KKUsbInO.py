@@ -49,6 +49,35 @@ def main():
         lg.critical("Cannot load config.json as json, %s", str(errs), stack_info=True)
         print(errs)
 
+    print("Config loaded, uuid:" + config['uuid'])
+
+    enum_drive = Null
+
+    if os.name == "posix":
+        enum_drive = enum_drive_linux
+        requiredConfig = set("ti"  # rescan interval
+                             , "mp"  #mounting point
+        )
+        if requiredConfig is not in config:
+            lg.error("Too few Configs for linux")
+            print("there is too few configure item for current posix system,following is required args")
+            print(requiredConfig)
+    elif os.name == "nt":
+        enum_drive = enum_drive_win
+        requiredConfig = set("ti"  # rescan interval
+        )
+        if requiredConfig is not in config:
+            lg.error("Too few Configs for win")
+            print("there is too few configure item for current win system,following is required args")
+            print(requiredConfig)
+    else:
+        lg.critical("unsupported OS")
+        print("There isn't a support for this OS")
+        exit(1)
+
+
+
+
 
 
  
