@@ -11,8 +11,8 @@ def enum_drive_win():
     chars="abcdefghijkmlnopqrstvuwxyz"
     charlst = list(chars)
     for char in charlst:
-        res=os.system("cd "+char+":")
-        if not res:
+        res = os.path.exists(char + ":\\")
+        if res:
             drivelst.add(char + ":\\")
 
     return set(drivelst)
@@ -64,18 +64,18 @@ def main():
 
     if os.name == "posix":
         enum_drive = enum_drive_linux
-        requiredConfig = set("ti"  # rescan interval
-                             , "mp"  #mounting point
+        requiredConfig = set(["ti"  # rescan interval
+            , "mp", "uuid"]  # mounting point
         )
-        if requiredConfig not in set(config):
+        if not requiredConfig <= set(config, ):
             lg.error("Too few Configs for linux")
             print("there is too few configure item for current posix system,following is required args")
             print(requiredConfig)
     elif os.name == "nt":
         enum_drive = enum_drive_win
-        requiredConfig = set("ti"  # rescan interval
+        requiredConfig = set(["ti", "uuid"]  # rescan interval
         )
-        if requiredConfig not in set(config):
+        if not requiredConfig <= set(config, ):
             lg.error("Too few Configs for win")
             print("there is too few configure item for current win system,following is required args")
             print(requiredConfig)
@@ -98,7 +98,8 @@ def main():
 
     previosdrive = enum_drive()
 
-    lg.info("founded device to be skipped,count= %s", previosdrive)
+    lg.info("founded device to be skipped,count= %s", len(previosdrive))
+    print("Ready.")
 
     while (1):
         nowdev = enum_drive()
@@ -106,12 +107,12 @@ def main():
             time.sleep(tif)
             continue
         else:
-            newdev = nowdev - previosdrive
+            newdev = list(nowdev - previosdrive)
             lg.info("device founded, %s", newdev[0])
             print("device was found at ", newdev[0])
 
             print("Copying......")
-            shutil.copytree("push", newdev[0])
+            shutil.copytree("push", newdev[0] + "push")
 
             lg.info("Copy finished!, %s", newdev[0])
             print("Copy finished!", newdev[0])
