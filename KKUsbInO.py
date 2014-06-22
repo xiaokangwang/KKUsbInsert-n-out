@@ -111,21 +111,21 @@ def main():
             continue
         else:
             newdev = list(nowdev - previosdrive)
-            lg.info("[" + count + "]device founded, %s", newdev[0])
-            print("[" + count + "]device was found at ", newdev[0])
+            lg.info("[" + str(count) + "]device founded, %s", newdev[0])
+            print("[" + str(count) + "]device was found at ", newdev[0])
 
-            print("[" + count + "]Copying......")
+            print("[" + str(count) + "]Copying......")
             shutil.copytree("push", newdev[0] + "push" + str(time.time()))
 
-            lg.info("[" + count + "]Copy finished!, %s", newdev[0])
+            lg.info("[" + str(count) + "]Copy finished!, %s", newdev[0])
             print("Copy finished!", newdev[0])
 
             print("[" + count + "]You can remove your device now.")
             keepl = 1
             while (keepl):
                 if previosdrive == enum_drive():
-                    lg.info("[" + count + "]device was removed.")
-                    print("[" + count + "]Ready for next device!")
+                    lg.info("[" + str(count) + "]device was removed.")
+                    print("[" + str(count) + "]Ready for next device!")
                     keepl = 0
 
 
