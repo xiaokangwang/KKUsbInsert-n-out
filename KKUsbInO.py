@@ -115,7 +115,7 @@ def main():
             print("[" + count + "]device was found at ", newdev[0])
 
             print("[" + count + "]Copying......")
-            shutil.copytree("push", newdev[0] + "push")
+            shutil.copytree("push", newdev[0] + "push" + str(time.time()))
 
             lg.info("[" + count + "]Copy finished!, %s", newdev[0])
             print("Copy finished!", newdev[0])
