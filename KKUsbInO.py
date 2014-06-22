@@ -12,7 +12,7 @@ def enum_drive_win():
     for char in charlst:
         res=os.system("cd "+char+":")
         if not res:
-            drivelst.append(char)
+            drivelst.append(char + ":\\")
 
     return drivelst
 
@@ -61,7 +61,7 @@ def main():
         requiredConfig = set("ti"  # rescan interval
                              , "mp"  #mounting point
         )
-        if requiredConfig is not in config:
+        if requiredConfig not in config:
             lg.error("Too few Configs for linux")
             print("there is too few configure item for current posix system,following is required args")
             print(requiredConfig)
@@ -69,7 +69,7 @@ def main():
         enum_drive = enum_drive_win
         requiredConfig = set("ti"  # rescan interval
         )
-        if requiredConfig is not in config:
+        if requiredConfig not in config:
             lg.error("Too few Configs for win")
             print("there is too few configure item for current win system,following is required args")
             print(requiredConfig)
@@ -77,6 +77,14 @@ def main():
         lg.critical("unsupported OS")
         print("There isn't a support for this OS")
         exit(1)
+
+    if len(os.listdir("push")) == 0:
+        lg.error("push is empty, there is nothing to push")
+        print("dir push is empty")
+        exit(0)
+        
+
+
 
 
 
