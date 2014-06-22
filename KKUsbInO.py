@@ -2,6 +2,7 @@ __author__ = 'xiaokangwang'
 import os
 import shutil
 import json
+import time
 import logging
 
 
@@ -12,7 +13,7 @@ def enum_drive_win():
     for char in charlst:
         res=os.system("cd "+char+":")
         if not res:
-            drivelst.append(char + ":\\")
+            drivelst.add(char + ":\\")
 
     return set(drivelst)
 
@@ -59,14 +60,14 @@ def main():
 
     print("Config loaded, uuid:" + config['uuid'])
 
-    enum_drive = Null
+    enum_drive = 0
 
     if os.name == "posix":
         enum_drive = enum_drive_linux
         requiredConfig = set("ti"  # rescan interval
                              , "mp"  #mounting point
         )
-        if requiredConfig not in config:
+        if requiredConfig not in set(config):
             lg.error("Too few Configs for linux")
             print("there is too few configure item for current posix system,following is required args")
             print(requiredConfig)
@@ -74,7 +75,7 @@ def main():
         enum_drive = enum_drive_win
         requiredConfig = set("ti"  # rescan interval
         )
-        if requiredConfig not in config:
+        if requiredConfig not in set(config):
             lg.error("Too few Configs for win")
             print("there is too few configure item for current win system,following is required args")
             print(requiredConfig)
